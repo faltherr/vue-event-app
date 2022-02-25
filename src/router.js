@@ -4,7 +4,9 @@ import EventCreate from './views/EventCreate.vue'
 import EventList from './views/EventList.vue'
 import EventShow from './views/EventShow.vue'
 import NProgress from 'nprogress' // <--- include the library
-import store from '@/store/store' // <--- Include our store
+import store from './store/store' // <--- Include our store
+import NotFound from './views/NotFound'
+import NetworkIssue from './views/NetworkIssue'
 
 Vue.use(Router)
 
@@ -32,8 +34,29 @@ const router = new Router({
         store.dispatch('event/fetchEvent', routeTo.params.id).then(event => {
           routeTo.params.event = event
           next()
+        }).catch((error) => {
+          if (error.response && error.response.status === 404) {
+            next({ name: '404', params: { resource: 'event' } })
+          } else {
+            next({ name: 'network-issue' })
+          }
         })
       }
+    },
+    {
+      path: '/404',
+      name: '404',
+      component: NotFound,
+      props: true
+    },
+    {
+      path: '/network-issue',
+      name: 'network-issue',
+      component: NetworkIssue
+    },
+    {
+      path: '*',
+      redirect: { name: '404', params: { resource: 'page' } }
     }
   ]
 })

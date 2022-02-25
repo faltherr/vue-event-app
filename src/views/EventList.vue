@@ -24,7 +24,7 @@
 <script>
 import EventCard from '@/components/EventCard.vue'
 import { mapState } from 'vuex'
-import store from '@store/store'
+import store from '@/store/store'
 
 function getPageEvents(routeTo, next) {
   const currentPage = parseInt(routeTo.query.page || 1)
