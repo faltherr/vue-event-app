@@ -1,6 +1,6 @@
 <template>
   <div>
-    <example />
+    <!-- <example /> -->
     <h1>Create an Event</h1>
     <form @submit.prevent="createEvent">
       <BaseSelect
@@ -112,13 +112,13 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import NProgress from 'nprogress'
-import Example from '../components/Example.vue'
+// import Example from '../components/Example.vue'
 import { required } from 'vuelidate/lib/validators'
 
 export default {
   components: {
     Datepicker,
-    Example
+    // Example
   },
   data() {
     const times = []

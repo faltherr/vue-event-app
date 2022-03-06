@@ -7,8 +7,8 @@ export default {
       message: 'I take priority.',
     }
   },
-  created() {
-    console.log(this.message)
-  },
+//   created() {
+//     console.log(this.message)
+//   },
 }
 </script>
