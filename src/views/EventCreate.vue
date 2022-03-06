@@ -1,17 +1,18 @@
 <template>
   <div>
-    <!-- <example /> -->
+    <example />
     <h1>Create an Event</h1>
     <form @submit.prevent="createEvent">
       <BaseSelect
         label="Select a category"
+        :class="{ error: $v.event.category.$error }"
         :options="categories"
         v-model="event.category"
         @blur="$v.event.category.$touch()"
       />
-      <template v-if="$v.event.time.$error">
-        <p v-if="!$v.event.time.required" class="errorMessage">
-          Time is required.
+      <template v-if="$v.event.category.$error">
+        <p v-if="!$v.event.category.required" class="errorMessage">
+          Category is required.
         </p>
       </template>
       <!-- <label>Select a category</label>
@@ -94,7 +95,11 @@
 
       <!-- <BaseButton @click="createEvent" > Submit </BaseButton> -->
       <!-- <BaseButton type="submit" buttonClass="-fill-gradient" disabled> Submit </BaseButton> -->
-      <BaseButton type="submit" buttonClass="-fill-gradient" :disabled="$v.$anyError">
+      <BaseButton
+        type="submit"
+        buttonClass="-fill-gradient"
+        :disabled="$v.$anyError"
+      >
         Submit
       </BaseButton>
       <p v-if="$v.$anyError" class="errorMessage">Please fill out the required field(s).</p>
@@ -107,11 +112,13 @@
 <script>
 import Datepicker from 'vuejs-datepicker'
 import NProgress from 'nprogress'
+import Example from '../components/Example.vue'
 import { required } from 'vuelidate/lib/validators'
 
 export default {
   components: {
     Datepicker,
+    Example
   },
   data() {
     const times = []
