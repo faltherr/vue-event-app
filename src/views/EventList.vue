@@ -1,6 +1,10 @@
 <template>
   <div>
+    <input v-model="myText" />
+    <p> {{ myText }} </p>
     <h1>Events for {{ user.user.name }}</h1>
+    <!-- <BaseButton @click="sendMessage">Message</BaseButton> -->
+
     <EventCard v-for="event in event.events" :key="event.id" :event="event" />
     <template v-if="page != 1">
       <router-link
@@ -47,6 +51,11 @@ export default {
   },
   components: {
     EventCard,
+  },
+  data() {
+    return {
+      myText: "Bodiddly",
+    }
   },
   beforeRouteEnter(routeTo, routeFrom, next) {
     getPageEvents(routeTo, next)

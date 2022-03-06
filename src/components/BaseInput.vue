@@ -9,6 +9,7 @@
       type="text"
       placeholder="Add an event title"
       @input="updateValue"
+      v-on="listeners"
     />
   </div>
 </template>
@@ -25,8 +26,16 @@ export default {
   },
   methods: {
     updateValue(event) {
-      this.$emit('inputa', event.target.value)
+      this.$emit('input', event.target.value)
     },
   },
+  computed: {
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue
+      }
+    }
+  }
 }
 </script>

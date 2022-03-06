@@ -1,7 +1,12 @@
 <template>
   <div>
     <label> {{ label }} </label>
-    <select v-bind="$attrs" @change="updateValue" :value="value">
+    <select
+      v-bind="$attrs"
+      @change="updateValue"
+      :value="value"
+      v-on="$listeners"
+    >
       <option
         v-for="option in options"
         :key="option"
@@ -22,7 +27,7 @@ export default {
     value: [String, Number],
     options: {
       type: Array,
-      required: true
+      required: true,
     },
   },
   methods: {
